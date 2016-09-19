@@ -33,16 +33,8 @@ write.table(Result[p05.index,],"M100.Kruskal.p05.mgs.list",col.names = T,row.nam
 ##LDA score estimating the effect side
 lda.data <- data.frame( Data[,match(Result[p01.index,1],colnames(Data))],
                         group = label)   
-#colnames(lda.data)<-unlist(lda.data[1,])
-#lda.data<-data.frame(lda.data[-1,])
-#write.table(lda.data,"test",col.names = T,row.names = F,sep="\t",quote = F);
-#read.table("test",header = T,sep = "\t")->lda.data
-##train <- sample(1:150, 75)
-##table(lda.data)
+
 library("MASS")
-#test<-lda.data[,-c(7,23,58,60,72,86,89,90,91,99,103,105,112)]
-#test<-lda.data[,-c(3,9,12,32,37,53,64,69,70,72,93,94,97,104,107,109,114,124,127,133,146,149,152,153,156,172,173,174,175,182,188,192,193,195,196,198,199,202,203,204,223,224,232,234,237,242,245,258,273,300,324)]
-#test<-lda.data[,-c(6,91,93,102,113,116,117,118,128,130,134)]
 #test<-lda.data[,-c(46,48,57,70,73,74,75,87,88,90,96,194,202)]
 z <- lda(group ~ ., lda.data, prior = c(1,1,1)/3)
 ##abs(z$scaling[,"LD1"])/sum(abs(z$scaling[,"LD1"]))->sca.LD1
@@ -87,6 +79,4 @@ for(i in 1:dim(z$means)[2]){
 
 lda.result[which(lda.result[,2]>3),]->temp
 write.table(temp,"temp>3",col.names = T,row.names = F,sep="\t",quote = F);
-#read.table("temp1.5",header = T,sep = "\t")->temp
-#temp[order(temp[,2],decreasing =T),] -> heatmap.data
 
